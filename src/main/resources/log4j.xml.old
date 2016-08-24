@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration>
+
+<appender name="SOCKET" class="org.apache.log4j.net.SocketAppender">
+    <param name="RemoteHost" value="127.0.0.1"/>
+    <param name="Port" value="3456"/>
+    <param name="ReconnectionDelay" value="10000"/>
+    <param name="Threshold" value="INFO" />  
+    <!--  
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %C:%L - %m%n"/>
+    </layout>
+    -->
+  </appender>
+
+    <appender name="FILE" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="./application.log"/>
+        <param name="Append" value="true"/>
+        <param name="DatePattern" value="'.'yyyy-MM"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %C:%L - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %C:%L - %m%n"/>
+        </layout>
+    </appender>
+    
+        <logger name="org.elasticsearch.node">
+        <level value="WARN"/>
+    </logger>
+  
+    <root>
+        <priority value="DEBUG"/>
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+        <appender-ref ref="SOCKET" />
+    </root>
+    
+
+</log4j:configuration>
